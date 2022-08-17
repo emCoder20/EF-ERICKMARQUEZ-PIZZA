@@ -29,7 +29,7 @@ public class PizzaServiceImpl implements PizzaService{
     }
 
     @Override
-    public Pizza porId(Integer idPizza) {
+    public Pizza listarPorId(Integer idPizza) {
         return repository.findById(idPizza).orElse(null);
     }
 
@@ -50,7 +50,7 @@ public class PizzaServiceImpl implements PizzaService{
 
     @Override
     public void asignarPizzeriaPizza() {
-        List<Pizzeria> listado = feingClient.listarPizzeriaSeleccionados();
+        List<Pizzeria> listado = feingClient.listarPizzerias();
         PizzaPizzeriaFK fk = null;
         PizzaDetalle detalle = null;
 

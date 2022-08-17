@@ -11,5 +11,5 @@ import java.util.List;
 public interface OpenFeingClient {
 
     @GetMapping("/api/pizzeria/listar")
-    public List<Pizzeria > listarPizzeriaSeleccionados();
+    public List<Pizzeria > listarPizzerias();
 }

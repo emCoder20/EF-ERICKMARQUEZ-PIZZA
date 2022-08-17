@@ -7,7 +7,7 @@ import java.util.List;
 public interface PizzaService {
 
     List<Pizza> listar();
-    Pizza porId(Integer idPizza);
+    Pizza listarPorId(Integer idPizza);
     void guardar(Pizza pizza);
     void eliminar(Integer idPizza);
     void actualizar(Pizza pizza);

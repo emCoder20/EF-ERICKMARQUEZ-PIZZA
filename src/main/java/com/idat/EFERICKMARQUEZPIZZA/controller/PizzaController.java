@@ -15,16 +15,16 @@ import java.util.List;
 public class PizzaController {
 
     @Autowired
-    private PizzaServiceImpl pizzaImpl;
+    private PizzaServiceImpl pizzaServ;
 
     @GetMapping("/listar")
-    public @ResponseBody ResponseEntity<List<Pizza>> listarP(){
-        return new ResponseEntity<List<Pizza>>(pizzaImpl.listar(), HttpStatus.OK);
+    public @ResponseBody ResponseEntity<List<Pizza>> listarPizz(){
+        return new ResponseEntity<List<Pizza>>(pizzaServ.listar(), HttpStatus.OK);
     }
 
     @GetMapping("/buscar/{idPizza}")
-    public ResponseEntity<Pizza> buscarP(@PathVariable Integer idPizza){
-        Pizza pi = pizzaImpl.porId(idPizza);
+    public ResponseEntity<Pizza> buscarPizz(@PathVariable Integer idPizza){
+        Pizza pi = pizzaServ.listarPorId(idPizza);
         if(pi!=null) {
             return new ResponseEntity<Pizza>(pi,HttpStatus.OK);
         }
@@ -32,28 +32,28 @@ public class PizzaController {
     }
 
     @PostMapping("/guardar")
-    public ResponseEntity<Void> guardarP(@RequestBody Pizza pizza){
-        pizzaImpl.guardar(pizza);
+    public ResponseEntity<Void> guardarPizz(@RequestBody Pizza pizza){
+        pizzaServ.guardar(pizza);
         return new ResponseEntity<Void>(HttpStatus.CREATED);
     }
 
     @PostMapping("actualizar")
-    public ResponseEntity<Void> actualizarP(@RequestBody Pizza pizza){
+    public ResponseEntity<Void> actualizarPizz(@RequestBody Pizza pizza){
 
-        Pizza  pi = pizzaImpl.porId(pizza.getIdPizza());
+        Pizza  pi = pizzaServ.listarPorId(pizza.getIdPizza());
 
         if(pi!=null) {
-            pizzaImpl.actualizar(pizza);
+            pizzaServ.actualizar(pizza);
             return new ResponseEntity<Void>(HttpStatus.OK);
         }
         return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
     }
 
     @DeleteMapping("/eliminar/{idPizza}")
-    public ResponseEntity<Void> eliminar(@PathVariable Integer idPizza){
-        Pizza pi = pizzaImpl.porId(idPizza);
+    public ResponseEntity<Void> eliminarPizz(@PathVariable Integer idPizza){
+        Pizza pi = pizzaServ.listarPorId(idPizza);
         if(pi!=null) {
-            pizzaImpl.eliminar(idPizza);
+            pizzaServ.eliminar(idPizza);
             return new ResponseEntity<Void>(HttpStatus.OK);
         }
         return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
@@ -61,6 +61,6 @@ public class PizzaController {
 
     @GetMapping("/asignar")
     public @ResponseBody void asignarPizzeria(){
-        pizzaImpl.asignarPizzeriaPizza();
+        pizzaServ.asignarPizzeriaPizza();
     }
 }
